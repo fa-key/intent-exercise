@@ -2,14 +2,20 @@ package id.ac.polinema.intentexercise;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ProfileActivity extends AppCompatActivity {
-    TextView tvAbout, tvFullname, tvLabel_email, tvLabel_hp;
-    ImageView viewBitmap;
+    private TextView tvAbout, tvFullname, tvLabel_email, tvLabel_hp;
+    private ImageView viewBitmap;
+    private Button btnHome;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,11 +31,21 @@ public class ProfileActivity extends AppCompatActivity {
         tvFullname= findViewById(R.id.label_fullname);
         tvLabel_email= findViewById(R.id.label_email);
         tvLabel_hp= findViewById(R.id.label_homepage);
+        btnHome = findViewById(R.id.button_homepage);
 
         viewBitmap.setImageBitmap(bitmap);
         tvAbout.setText(about);
         tvFullname.setText(fullname);
         tvLabel_email.setText(email);
         tvLabel_hp.setText(homepage);
+
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri webpage = Uri.parse("https://www.linkedin.com/in/fayza-itsna-nooramadhan-2aa8671b9/");
+                Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
+                startActivity(webIntent);
+            }
+        });
     }
 }
